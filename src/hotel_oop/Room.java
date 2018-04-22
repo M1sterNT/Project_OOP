@@ -11,4 +11,27 @@ package hotel_oop;
  */
 public class Room {
     
+    public static int getBalance(int RoomID){  
+        return 0;
+    }
+    public static int setBalance(int RoomID){  
+        return 0;
+    }
+    public static int getType(int RoomID){  
+        return 0;
+    }
+    public static void saveData(){
+    
+    }
+    public static void updateData(int RoomID){
+    
+    }
+    public static String[] loadData(int RoomID){
+        String data[] = new String[10];
+        return data;
+    }  
+    public static String[] loadData(){
+        String data[] = new String[10];
+        return data;
+    }
 }
