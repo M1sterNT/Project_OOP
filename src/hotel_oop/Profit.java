@@ -417,13 +417,11 @@ public class Profit extends javax.swing.JFrame {
     private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        new Booking_Customer().setVisible(true);
     }//GEN-LAST:event_jPanel4MouseClicked
 
     private void jPanel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel9MouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        new BOOKING().setVisible(true);
     }//GEN-LAST:event_jPanel9MouseClicked
 
     /**

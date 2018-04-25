@@ -14,12 +14,12 @@ import java.io.*;
 import java.util.Scanner;
 import javax.swing.table.DefaultTableModel;
 
-public class BOOKING extends javax.swing.JFrame {
+public class Booking extends javax.swing.JFrame {
 
     /**
      * Creates new form BOOKING
      */
-    public BOOKING() {
+    public Booking() {
         initComponents();
         try {        
          Scanner sf = new Scanner (new FileReader ("booking.txt"));
@@ -71,6 +71,7 @@ public class BOOKING extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         setType(java.awt.Window.Type.UTILITY);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -476,8 +477,7 @@ public class BOOKING extends javax.swing.JFrame {
 
     private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
      // Real_HOME home = new Real_HOME();
-      this.setVisible(false);
-      new Real_HOME().setVisible(true);
+ 
     }//GEN-LAST:event_jPanel4MouseClicked
 
     private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
@@ -486,8 +486,7 @@ public class BOOKING extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel6MouseClicked
 
     private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
-         this.setVisible(false);
-      new Booking_Customer().setVisible(true);  // TODO add your handling code here:// TODO add your handling code here:
+      this.setVisible(false);
     }//GEN-LAST:event_jPanel8MouseClicked
 
     private void jPanel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel10MouseClicked
@@ -515,20 +514,20 @@ public class BOOKING extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BOOKING.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Booking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BOOKING.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Booking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BOOKING.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Booking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BOOKING.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Booking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BOOKING().setVisible(true);
+                new Booking().setVisible(true);
             }
         });
     }

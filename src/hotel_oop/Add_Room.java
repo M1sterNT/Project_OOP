@@ -69,6 +69,8 @@ public class Add_Room extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+        setType(java.awt.Window.Type.UTILITY);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -437,7 +439,6 @@ public class Add_Room extends javax.swing.JFrame {
     private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        new Booking_Customer().setVisible(true);
     }//GEN-LAST:event_jPanel4MouseClicked
 
     /**
