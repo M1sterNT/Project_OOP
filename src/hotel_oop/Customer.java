@@ -10,6 +10,8 @@ package hotel_oop;
  * @author PrinceCatvader
  */
 import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -19,11 +21,16 @@ import javax.swing.table.DefaultTableModel;
 
 public class Customer extends javax.swing.JFrame {
 
+    Boolean Running = true;
+
     /**
      * Creates new form BOOKING
      */
     public Customer() {
         initComponents();
+        Timer time = new Timer();
+        time.start();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -454,22 +461,41 @@ public class Customer extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    class Timer extends Thread {
+
+        public void run() {
+            String Month[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+            String[] namesOfDays = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+            int day = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+            while (Running) {
+                jLabel1.setText(new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()));
+                jLabel5.setText(namesOfDays[day - 1] + " " + new SimpleDateFormat("dd").format(Calendar.getInstance().getTime()));
+                jLabel8.setText(Month[Integer.parseInt(new SimpleDateFormat("MM").format(Calendar.getInstance().getTime())) - 1] + " " + new SimpleDateFormat("YYYY").format(Calendar.getInstance().getTime()));
+            }
+
+        }
+    }
+
     private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
-     // Real_HOME home = new Real_HOME();
- 
+
     }//GEN-LAST:event_jPanel4MouseClicked
 
     private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
-        this.setVisible(false);
-      new Profit().setVisible(true);// TODO add your handling code here:
+        Running = false;
+        this.dispose();
+        new Profit().setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_jPanel6MouseClicked
 
     private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
-      this.setVisible(false);
+        Running = false;
+        this.dispose();
+        new Booking().setVisible(true);
     }//GEN-LAST:event_jPanel8MouseClicked
 
     private void jPanel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel10MouseClicked
-     
+        Running = false;
+        this.dispose();
+        new Room().setVisible(true);
     }//GEN-LAST:event_jPanel10MouseClicked
 
     private void jPanel4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseReleased
@@ -492,48 +518,76 @@ public class Customer extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_telTextActionPerformed
 
+    public static boolean contains(final int[] array, final int v) {
+
+        boolean result = false;
+
+        for (int i : array) {
+            if (i == v) {
+                result = true;
+                break;
+            }
+        }
+
+        return result;
+    }
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        // TODO add your handling code here:
-        if(nameText.getText().trim() != "" && roomText.getText().trim() != "" && dateText.getText().trim() != "" && telText.getText().trim() != "" && bookingText.getText().trim() != ""){
-            String filename = "booking.txt";
-            FileInputStream fstream = null;
-            try {
-                fstream = new FileInputStream(filename);
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(Customer.class.getName()).log(Level.SEVERE, null, ex);
+        int roomID[] = new int[100];
+        int roomCount = 0;
+        try {
+            Scanner sf = new Scanner(new FileReader("room.txt"));
+            while (sf.hasNext()) {
+                roomID[roomCount] = sf.nextInt();
+                roomCount++;
+                sf.next();
             }
-            BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
-            String strLine;
-            int count = 1;
-            try {
-                while ((strLine = br.readLine()) != null)   {
-                    count++;
+        } catch (IOException e) {
+            System.out.print(e);
+        }
+        if (contains(roomID, Integer.parseInt(roomText.getText()))) {
+            if (nameText.getText().trim() != "" && roomText.getText().trim() != "" && dateText.getText().trim() != "" && telText.getText().trim() != "" && bookingText.getText().trim() != "") {
+                String filename = "booking.txt";
+                FileInputStream fstream = null;
+                try {
+                    fstream = new FileInputStream(filename);
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(Customer.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } catch (IOException ex) {
-                Logger.getLogger(Customer.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            File fout = new File(filename);
-            FileOutputStream fos;
-            try {
-                fos = new FileOutputStream(fout,true);
-                BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
-                bw.write(count+"\t"+ nameText.getText()+"\t" +roomText.getText()+"\t" +telText.getText()+"\t" +dateText.getText()+"\t" +bookingText.getText()+"\t1");
-                bw.newLine();
-                bw.close();
-                nameText.setText("");
-                roomText.setText("");
-                dateText.setText("");
-                telText.setText("");
-                bookingText.setText("");
-                JOptionPane.showMessageDialog(null, "ทำการเพิ่มเรียบร้อยแล้ว", "ขอขอบคุณ", JOptionPane.INFORMATION_MESSAGE);
+                BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+                String strLine;
+                int count = 1;
+                try {
+                    while ((strLine = br.readLine()) != null) {
+                        count++;
+                    }
+                } catch (IOException ex) {
+                    Logger.getLogger(Customer.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                File fout = new File(filename);
+                FileOutputStream fos;
+                try {
+                    fos = new FileOutputStream(fout, true);
+                    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+                    bw.write(count + "\t" + nameText.getText() + "\t" + roomText.getText() + "\t" + telText.getText() + "\t" + dateText.getText() + "\t" + bookingText.getText() + "\t1");
+                    bw.newLine();
+                    bw.close();
+                    nameText.setText("");
+                    roomText.setText("");
+                    dateText.setText("");
+                    telText.setText("");
+                    bookingText.setText("");
+                    JOptionPane.showMessageDialog(null, "ทำการเพิ่มเรียบร้อยแล้ว", "ขอขอบคุณ", JOptionPane.INFORMATION_MESSAGE);
 
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(Add_Room.class.getName()).log(Level.SEVERE, null, ex);
-            }   catch (IOException ex) {
-                Logger.getLogger(Add_Room.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(Add_Room.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(Add_Room.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
+            }
+        }else {
+            JOptionPane.showMessageDialog(this, "Room not found", "Room ID not found!", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

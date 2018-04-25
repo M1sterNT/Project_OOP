@@ -26,10 +26,13 @@ public class Add_Room extends javax.swing.JFrame {
     /**
      * Creates new form Add_Room
      */
+    boolean Running = true;
+
     public Add_Room() {
         initComponents();
-        Timer time =  new Timer();
+        Timer time = new Timer();
         time.start();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -130,6 +133,11 @@ public class Add_Room extends javax.swing.JFrame {
         );
 
         jPanel6.setBackground(new java.awt.Color(63, 63, 182));
+        jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel6MouseClicked(evt);
+            }
+        });
 
         jPanel7.setBackground(new java.awt.Color(63, 63, 182));
 
@@ -172,6 +180,11 @@ public class Add_Room extends javax.swing.JFrame {
         );
 
         jPanel8.setBackground(new java.awt.Color(63, 63, 182));
+        jPanel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel8MouseClicked(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("TH Sarabun New", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -195,6 +208,11 @@ public class Add_Room extends javax.swing.JFrame {
         );
 
         jPanel10.setBackground(new java.awt.Color(63, 63, 182));
+        jPanel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel10MouseClicked(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("TH Sarabun New", 1, 24)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
@@ -400,46 +418,66 @@ public class Add_Room extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if(jTextField1.getText().trim() != "" && jTextField3.getText().trim() != ""){
-        File fout = new File("room.txt");
-	FileOutputStream fos;
-        try {
-            fos = new FileOutputStream(fout,true);
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
-            bw.write(jTextField1.getText()+"\t" +jTextField3.getText());
-	    bw.newLine();
-            bw.close();
-            jTextField1.setText("");
-            jTextField3.setText("");
-            JOptionPane.showMessageDialog(null, "ทำการเพิ่มเรียบร้อยแล้ว", "ขอขอบคุณ", JOptionPane.INFORMATION_MESSAGE);
+        if (jTextField1.getText().trim() != "" && jTextField3.getText().trim() != "") {
+            File fout = new File("room.txt");
+            FileOutputStream fos;
+            try {
+                fos = new FileOutputStream(fout, true);
+                BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+                bw.write(jTextField1.getText() + "\t" + jTextField3.getText());
+                bw.newLine();
+                bw.close();
+                jTextField1.setText("");
+                jTextField3.setText("");
+                JOptionPane.showMessageDialog(null, "ทำการเพิ่มเรียบร้อยแล้ว", "ขอขอบคุณ", JOptionPane.INFORMATION_MESSAGE);
 
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Add_Room.class.getName()).log(Level.SEVERE, null, ex);
-        }   catch (IOException ex) {
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Add_Room.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
                 Logger.getLogger(Add_Room.class.getName()).log(Level.SEVERE, null, ex);
             }
-        
+
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    class Timer extends Thread  {
-      public void run(){
-          String Month[] = {"January","February","March","April","May","June","July","August","September","October","November","December"};
-          String[] namesOfDays =  {"SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"};
-          int day = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
-          while(true){
-              jLabel1.setText( new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()));
-              jLabel5.setText( namesOfDays[day -1 ] +" " + new SimpleDateFormat("dd").format(Calendar.getInstance().getTime()));
-              jLabel8.setText( Month[Integer.parseInt(new SimpleDateFormat("MM").format(Calendar.getInstance().getTime())) - 1] +" " + new SimpleDateFormat("YYYY").format(Calendar.getInstance().getTime()));
-          }
-           
+    class Timer extends Thread {
+
+        public void run() {
+            String Month[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+            String[] namesOfDays = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+            int day = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+            while (Running) {
+                jLabel1.setText(new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()));
+                jLabel5.setText(namesOfDays[day - 1] + " " + new SimpleDateFormat("dd").format(Calendar.getInstance().getTime()));
+                jLabel8.setText(Month[Integer.parseInt(new SimpleDateFormat("MM").format(Calendar.getInstance().getTime())) - 1] + " " + new SimpleDateFormat("YYYY").format(Calendar.getInstance().getTime()));
+            }
+
         }
     }
-       
+
     private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
-        // TODO add your handling code here:
-        this.setVisible(false);
+        Running = false;
+        this.dispose();
+        new Customer().setVisible(true);
     }//GEN-LAST:event_jPanel4MouseClicked
+
+    private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
+        Running = false;
+        this.dispose();
+        new Profit().setVisible(true);
+    }//GEN-LAST:event_jPanel6MouseClicked
+
+    private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
+        Running = false;
+        this.dispose();
+        new Booking().setVisible(true);
+    }//GEN-LAST:event_jPanel8MouseClicked
+
+    private void jPanel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel10MouseClicked
+        Running = false;
+        this.dispose();
+        new Room().setVisible(true);
+    }//GEN-LAST:event_jPanel10MouseClicked
 
     /**
      * @param args the command line arguments

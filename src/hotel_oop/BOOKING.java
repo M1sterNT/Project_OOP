@@ -9,31 +9,44 @@ package hotel_oop;
  *
  * @author PrinceCatvader
  */
+
 import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 import java.util.Scanner;
 import javax.swing.table.DefaultTableModel;
 
 public class Booking extends javax.swing.JFrame {
 
+    boolean Running = true;
+
     /**
      * Creates new form BOOKING
      */
     public Booking() {
         initComponents();
-        try {        
-         Scanner sf = new Scanner (new FileReader ("booking.txt"));
-       
-           while(sf.hasNext()) {
-                 Object[] row = { sf.nextInt(), sf.next(), sf.nextInt(), sf.next(),sf.next(),sf.next(),sf.nextInt() };
+        Timer time = new Timer();
+        time.start();
+        this.setLocationRelativeTo(null);
+        try {
+            Scanner sf = new Scanner(new FileReader("booking.txt"));
 
-                 DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-                 model.insertRow(0, row);
-                 //model.addRow(row);
-           }
-        }catch (IOException e){
-             System.out.print(e);
+            while (sf.hasNext()) {
+                Object[] row = {sf.nextInt(), sf.next(), sf.nextInt(), sf.next(), sf.next(), sf.next(), readStatus(sf.nextInt())};
+
+                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                model.insertRow(0, row);
+                //model.addRow(row);
+            }
+        } catch (IOException e) {
+            System.out.print(e);
         }
+    }
+    public String readStatus(int d){
+        if (d == 0){ return "Empty";} else return "Busy";
     }
 
     /**
@@ -268,7 +281,7 @@ public class Booking extends javax.swing.JFrame {
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addContainerGap())
         );
@@ -388,6 +401,11 @@ public class Booking extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("TH Sarabun New", 1, 24)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("เพิ่มห้องพัก");
+        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel12MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -395,28 +413,32 @@ public class Booking extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(59, 59, 59)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(13, 13, 13)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(36, 36, 36)
-                                .addComponent(jLabel1))
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addGap(10, 10, 10)))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(25, 25, 25)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(59, 59, 59)
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(200, 200, 200)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(36, 36, 36)
+                                        .addComponent(jLabel1))
+                                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addGap(10, 10, 10))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
                 .addGap(56, 56, 56))
         );
@@ -426,11 +448,11 @@ public class Booking extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(124, 124, 124)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(91, 91, 91)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(33, 33, 33)
+                        .addComponent(jLabel3)
+                        .addGap(71, 71, 71)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -475,28 +497,55 @@ public class Booking extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    class Timer extends Thread {
+
+        public void run() {
+            String Month[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+            String[] namesOfDays = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+            int day = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+            while (Running) {
+                jLabel1.setText(new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()));
+                jLabel5.setText(namesOfDays[day - 1] + " " + new SimpleDateFormat("dd").format(Calendar.getInstance().getTime()));
+                jLabel8.setText(Month[Integer.parseInt(new SimpleDateFormat("MM").format(Calendar.getInstance().getTime())) - 1] + " " + new SimpleDateFormat("YYYY").format(Calendar.getInstance().getTime()));
+            }
+
+        }
+    }
+
     private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
-     // Real_HOME home = new Real_HOME();
- 
+        Running = false;
+        this.dispose();
+        new Customer().setVisible(true);
+
     }//GEN-LAST:event_jPanel4MouseClicked
 
     private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
-        this.setVisible(false);
-      new Profit().setVisible(true);// TODO add your handling code here:
+        Running = false;
+        this.dispose();
+        new Profit().setVisible(true);
     }//GEN-LAST:event_jPanel6MouseClicked
 
     private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
-      this.setVisible(false);
+
     }//GEN-LAST:event_jPanel8MouseClicked
 
     private void jPanel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel10MouseClicked
-     
+        Running = false;
+        this.dispose();
+        new Room().setVisible(true);
     }//GEN-LAST:event_jPanel10MouseClicked
 
     private void jPanel4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel4MouseReleased
 
+    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
+        Running = false;
+        this.dispose();
+        new Add_Room().setVisible(true);
+    }//GEN-LAST:event_jLabel12MouseClicked
+    List<String> lines = new ArrayList<>();
+    String line = null;
     /**
      * @param args the command line arguments
      */
@@ -522,6 +571,7 @@ public class Booking extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Booking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

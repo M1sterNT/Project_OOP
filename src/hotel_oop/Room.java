@@ -10,6 +10,8 @@ package hotel_oop;
  * @author PrinceCatvader
  */
 import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import java.util.Scanner;
 import javax.swing.table.DefaultTableModel;
@@ -19,19 +21,23 @@ public class Room extends javax.swing.JFrame {
     /**
      * Creates new form BOOKING
      */
+    boolean Running = true;
     public Room() {
         initComponents();
-        try {        
-         Scanner sf = new Scanner (new FileReader ("room.txt"));
-           while(sf.hasNext()) {
-                 Object[] row = { sf.next(), sf.next() };
+        Timer time = new Timer();
+        time.start();
+        this.setLocationRelativeTo(null);
+        try {
+            Scanner sf = new Scanner(new FileReader("room.txt"));
+            while (sf.hasNext()) {
+                Object[] row = {sf.next(), sf.next()};
 
-                 DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-                 model.insertRow(0, row);
-                 //model.addRow(row);
-           }
-        }catch (IOException e){
-             System.out.print(e);
+                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                model.insertRow(0, row);
+                //model.addRow(row);
+            }
+        } catch (IOException e) {
+            System.out.print(e);
         }
     }
 
@@ -267,7 +273,7 @@ public class Room extends javax.swing.JFrame {
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addContainerGap())
         );
@@ -387,6 +393,11 @@ public class Room extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("TH Sarabun New", 1, 24)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("เพิ่มห้องพัก");
+        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel12MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -474,27 +485,50 @@ public class Room extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    class Timer extends Thread {
+
+        public void run() {
+            String Month[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+            String[] namesOfDays = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+            int day = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+          //  while (true) {
+                jLabel1.setText(new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()));
+                jLabel5.setText(namesOfDays[day - 1] + " " + new SimpleDateFormat("dd").format(Calendar.getInstance().getTime()));
+                jLabel8.setText(Month[Integer.parseInt(new SimpleDateFormat("MM").format(Calendar.getInstance().getTime())) - 1] + " " + new SimpleDateFormat("YYYY").format(Calendar.getInstance().getTime()));
+          //  }
+
+        }
+    }
+
     private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
-     // Real_HOME home = new Real_HOME();
- 
+
+        this.dispose(); 
+        new Customer().setVisible(true);
+
     }//GEN-LAST:event_jPanel4MouseClicked
 
     private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
-        this.setVisible(false);
-      new Profit().setVisible(true);// TODO add your handling code here:
+        this.dispose(); 
+        new Profit().setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_jPanel6MouseClicked
 
     private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
-      this.setVisible(false);
+        this.dispose(); 
+        new Booking().setVisible(true);
     }//GEN-LAST:event_jPanel8MouseClicked
 
     private void jPanel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel10MouseClicked
-     
+
     }//GEN-LAST:event_jPanel10MouseClicked
 
     private void jPanel4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel4MouseReleased
+
+    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
+        this.dispose(); 
+        new Add_Room().setVisible(true);
+    }//GEN-LAST:event_jLabel12MouseClicked
 
     /**
      * @param args the command line arguments
