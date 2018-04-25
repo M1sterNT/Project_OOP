@@ -70,21 +70,5 @@ public class ReadFileAndWriteFile{
         }
         return 0;
     }
-     public String readUTF(){
-        try{
-        return file.readUTF();
-        }catch (IOException e){
-            System.out.println("Error Reading to file UTF ");System.exit(1);
-        } 
-        return null;
-    }
-    public int readInt(){
-        try{
-        return file.readInt();
-        }catch (IOException e){
-            System.out.println("Error Reading to file Int ");System.exit(1);
-        } 
-        return 0;
-    }
     
 }
