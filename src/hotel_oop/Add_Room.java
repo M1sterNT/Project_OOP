@@ -11,6 +11,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -26,6 +28,8 @@ public class Add_Room extends javax.swing.JFrame {
      */
     public Add_Room() {
         initComponents();
+        Timer time =  new Timer();
+        time.start();
     }
 
     /**
@@ -77,6 +81,11 @@ public class Add_Room extends javax.swing.JFrame {
         jLabel2.setText("LETOH INN");
 
         jPanel4.setBackground(new java.awt.Color(63, 63, 182));
+        jPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel4MouseClicked(evt);
+            }
+        });
 
         jPanel5.setBackground(new java.awt.Color(63, 63, 182));
 
@@ -410,6 +419,26 @@ public class Add_Room extends javax.swing.JFrame {
         
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    class Timer extends Thread  {
+      public void run(){
+          String Month[] = {"January","February","March","April","May","June","July","August","September","October","November","December"};
+          String[] namesOfDays =  {"SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"};
+          int day = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+          while(true){
+              jLabel1.setText( new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()));
+              jLabel5.setText( namesOfDays[day -1 ] +" " + new SimpleDateFormat("dd").format(Calendar.getInstance().getTime()));
+              jLabel8.setText( Month[Integer.parseInt(new SimpleDateFormat("MM").format(Calendar.getInstance().getTime())) - 1] +" " + new SimpleDateFormat("YYYY").format(Calendar.getInstance().getTime()));
+          }
+           
+        }
+    }
+       
+    private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new Booking_Customer().setVisible(true);
+    }//GEN-LAST:event_jPanel4MouseClicked
 
     /**
      * @param args the command line arguments

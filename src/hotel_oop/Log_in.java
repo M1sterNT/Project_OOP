@@ -43,7 +43,7 @@ public class Log_in extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(35, 35, 166));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\PrinceCatvader\\Downloads\\user (5).png")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\PrinceCatvader\\Documents\\NetBeansProjects\\Hotel_OOP\\build\\classes\\user (5).png")); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("TH Sarabun New", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));

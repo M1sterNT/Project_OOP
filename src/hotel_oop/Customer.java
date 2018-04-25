@@ -65,10 +65,14 @@ public class Customer extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\PrinceCatvader\\Documents\\NetBeansProjects\\Hotel_OOP\\build\\classes\\placeholder (13).png")); // NOI18N
         jLabel2.setText("LETOH INN");
 
         jPanel5.setBackground(new java.awt.Color(63, 63, 182));
+        jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel5MouseClicked(evt);
+            }
+        });
 
         jPanel6.setBackground(new java.awt.Color(63, 63, 182));
 
@@ -198,8 +202,6 @@ public class Customer extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\PrinceCatvader\\Documents\\NetBeansProjects\\Hotel_OOP\\build\\classes\\logout.png")); // NOI18N
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -239,8 +241,6 @@ public class Customer extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("11:26 PM");
-
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\PrinceCatvader\\Documents\\NetBeansProjects\\Hotel_OOP\\build\\classes\\magnifying-glass.png")); // NOI18N
 
         jTextField2.setBackground(new java.awt.Color(131, 153, 252));
 
@@ -387,6 +387,12 @@ public class Customer extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new Booking_Customer().setVisible(true);
+    }//GEN-LAST:event_jPanel5MouseClicked
 
     /**
      * @param args the command line arguments
