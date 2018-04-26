@@ -76,6 +76,7 @@ public class Room extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("LETOH INN");
         setResizable(false);
         setType(java.awt.Window.Type.UTILITY);
 
@@ -491,28 +492,30 @@ public class Room extends javax.swing.JFrame {
             String Month[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
             String[] namesOfDays = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
             int day = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
-          //  while (true) {
+            while (Running) {
                 jLabel1.setText(new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()));
                 jLabel5.setText(namesOfDays[day - 1] + " " + new SimpleDateFormat("dd").format(Calendar.getInstance().getTime()));
                 jLabel8.setText(Month[Integer.parseInt(new SimpleDateFormat("MM").format(Calendar.getInstance().getTime())) - 1] + " " + new SimpleDateFormat("YYYY").format(Calendar.getInstance().getTime()));
-          //  }
+            }
 
         }
     }
 
     private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
-
+        Running = false;
         this.dispose(); 
         new Customer().setVisible(true);
 
     }//GEN-LAST:event_jPanel4MouseClicked
 
     private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
+        Running = false;
         this.dispose(); 
         new Profit().setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_jPanel6MouseClicked
 
     private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
+        Running = false;
         this.dispose(); 
         new Booking().setVisible(true);
     }//GEN-LAST:event_jPanel8MouseClicked
@@ -526,6 +529,7 @@ public class Room extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel4MouseReleased
 
     private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
+        Running = false;
         this.dispose(); 
         new Add_Room().setVisible(true);
     }//GEN-LAST:event_jLabel12MouseClicked

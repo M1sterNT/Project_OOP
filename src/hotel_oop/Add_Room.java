@@ -72,6 +72,7 @@ public class Add_Room extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("LETOH INN");
         setResizable(false);
         setType(java.awt.Window.Type.UTILITY);
 
@@ -345,7 +346,7 @@ public class Add_Room extends javax.swing.JFrame {
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel19.setText("   TEL:");
 
-        jButton1.setText("OK");
+        jButton1.setText("Save");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
